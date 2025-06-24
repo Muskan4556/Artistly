@@ -1,14 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
-  ArrowRight,
-  Heart,
-} from "lucide-react";
+import { Github, Linkedin, ArrowRight, Heart } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Footer() {
@@ -34,10 +27,16 @@ export default function Footer() {
   };
 
   const socialIcons = [
-    { Icon: Facebook, href: "#", label: "Facebook" },
-    { Icon: Twitter, href: "#", label: "Twitter" },
-    { Icon: Instagram, href: "#", label: "Instagram" },
-    { Icon: Linkedin, href: "#", label: "LinkedIn" },
+    {
+      Icon: Linkedin,
+      href: "https://www.linkedin.com/in/muskan-aa7862267/",
+      label: "LinkedIn",
+    },
+    {
+      Icon: Github,
+      href: "https://github.com/Muskan4556/Artistly",
+      label: "GitHub",
+    },
   ];
 
   return (
@@ -57,7 +56,7 @@ export default function Footer() {
             <h3 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">
               Artistly
             </h3>
-            <p className="text-gray-300 leading-relaxed mb-8 text-lg">
+            <p className="text-gray-300 leading-relaxed mb-8 text-base sm:text-base lg:text-lg">
               The premier platform connecting event planners with talented
               performing artists. Make your events unforgettable with our
               curated collection of professional performers.
@@ -68,6 +67,8 @@ export default function Footer() {
                 <motion.a
                   key={label}
                   href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={label}
                   className="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center hover:from-purple-700 hover:to-pink-700 transition-all duration-300"
                   whileHover={{ scale: 1.1, rotate: 5 }}
@@ -83,7 +84,7 @@ export default function Footer() {
               variants={itemVariants}
             >
               <h4 className="text-lg font-semibold mb-3">Stay Updated</h4>
-              <p className="text-gray-300 text-sm mb-4">
+              <p className="text-gray-300 text-sm sm:text-base mb-4">
                 Get notified about new artists and exclusive booking deals.
               </p>
               <div className="flex">
@@ -104,14 +105,16 @@ export default function Footer() {
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <h4 className="text-xl font-semibold mb-6">For Event Planners</h4>
+            <h4 className="text-lg sm:text-xl font-semibold mb-6">
+              For Event Planners
+            </h4>
             <ul className="space-y-3">
               {[
                 { text: "Browse Artists", href: "/artists" },
-                { text: "Categories", href: "/categories" },
-                { text: "How It Works", href: "/how-it-works" },
-                { text: "Pricing", href: "/pricing" },
-                { text: "Success Stories", href: "/stories" },
+                { text: "Categories", href: "#" },
+                { text: "How It Works", href: "#" },
+                { text: "Pricing", href: "#" },
+                { text: "Success Stories", href: "#" },
               ].map((link) => (
                 <li key={link.text}>
                   <motion.div
@@ -120,9 +123,8 @@ export default function Footer() {
                   >
                     <Link
                       href={link.href}
-                      className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center group"
+                      className="text-gray-400 hover:text-white transition-colors duration-300 text-base"
                     >
-                      <ArrowRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                       {link.text}
                     </Link>
                   </motion.div>
@@ -132,14 +134,16 @@ export default function Footer() {
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <h4 className="text-xl font-semibold mb-6">For Artists</h4>
+            <h4 className="text-lg sm:text-xl font-semibold mb-6">
+              For Artists
+            </h4>
             <ul className="space-y-3">
               {[
-                { text: "Join Artistly", href: "/onboarding" },
-                { text: "Artist Dashboard", href: "/dashboard" },
-                { text: "Resources", href: "/resources" },
-                { text: "Support", href: "/support" },
-                { text: "Community", href: "/community" },
+                { text: "Join Artistly", href: "/artist-onboarding" },
+                { text: "Artist Dashboard", href: "#" },
+                { text: "Resources", href: "#" },
+                { text: "Support", href: "#" },
+                { text: "Community", href: "#" },
               ].map((link) => (
                 <li key={link.text}>
                   <motion.div
@@ -148,9 +152,8 @@ export default function Footer() {
                   >
                     <Link
                       href={link.href}
-                      className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center group"
+                      className="text-gray-400 hover:text-white transition-colors duration-300 text-base"
                     >
-                      <ArrowRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                       {link.text}
                     </Link>
                   </motion.div>
@@ -165,23 +168,32 @@ export default function Footer() {
           variants={itemVariants}
         >
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="flex items-center text-gray-400">
-              <span>© 2025 Artistly. All rights reserved. | Made with</span>
-              <motion.span
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{
-                  duration: 1,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="mx-2"
-              >
-                <Heart className="w-4 h-4 text-red-500 fill-current" />
-              </motion.span>
-              <span>for the creative community</span>
+            <div className="flex flex-col sm:flex-row items-center text-gray-400 text-center sm:text-left text-sm sm:text-base">
+              <span className="mb-2 sm:mb-0">
+                © 2025 Artistly. All rights reserved.
+              </span>
+              <div className="flex items-center">
+                <span className="mx-2 hidden sm:inline">|</span>
+                <span>Created with</span>
+                <motion.span
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{
+                    duration: 1,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="mx-1"
+                >
+                  <Heart className="w-4 h-4 text-red-500 fill-current" />
+                </motion.span>
+                <span>by</span>
+                <span className="ml-1 font-medium text-purple-400 hover:text-purple-300 transition-colors">
+                  Muskan
+                </span>
+              </div>
             </div>
 
-            <div className="flex flex-wrap justify-center items-center gap-4 text-sm text-gray-500">
+            <div className="flex flex-wrap justify-center items-center gap-4 text-sm sm:text-base text-gray-500">
               <span className="flex items-center">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
                 Verified Platform

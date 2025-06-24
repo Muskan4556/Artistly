@@ -1,12 +1,10 @@
 "use client";
 
-import Navigation from "@/components/shared/navigation";
 import HeroSection from "@/components/homepage/hero-section";
 import CategoryCard from "@/components/homepage/category-card";
 import ProcessStep from "@/components/homepage/process-step";
 import FeaturedArtistCard from "@/components/homepage/featured-artist-card";
 import SocialProofSection from "@/components/homepage/social-proof-section";
-import Footer from "@/components/shared/footer";
 import {
   categories,
   howItWorksSteps,
@@ -15,9 +13,7 @@ import {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-gray-900 dark:to-gray-800">
-      <Navigation />
-
+    <div className="bg-gradient-to-b from-slate-50 to-white dark:from-gray-900 dark:to-gray-800">
       <HeroSection />
 
       <section className="py-20 bg-white dark:bg-gray-900">
@@ -85,8 +81,6 @@ export default function Home() {
       </section>
 
       <SocialProofSection />
-
-      <Footer />
     </div>
   );
 }

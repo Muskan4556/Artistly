@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/shared/theme-provider";
+import { Toaster } from "sonner";
+import Navigation from "@/components/shared/navigation";
+import Footer from "@/components/shared/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,7 +28,11 @@ export const metadata: Metadata = {
     "entertainment",
   ],
   authors: [{ name: "Artistly Team" }],
-  viewport: "width=device-width, initial-scale=1",
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -47,8 +54,18 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
-      >
-        {children}
+        >
+          <Navigation />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+          <Toaster
+            position="top-right"
+            richColors
+            expand={true}
+            closeButton={false}
+            duration={4000}
+            visibleToasts={3}
+          />
         </ThemeProvider>
       </body>
     </html>

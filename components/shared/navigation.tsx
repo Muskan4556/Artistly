@@ -24,13 +24,9 @@ export default function Navigation() {
               href="/"
               className="focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-md"
             >
-              <motion.h1
-                className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                 Artistly
-              </motion.h1>
+              </h1>
             </Link>
           </div>
 
