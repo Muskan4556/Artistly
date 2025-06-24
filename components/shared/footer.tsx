@@ -48,7 +48,6 @@ export default function Footer() {
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
     >
-      {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-pink-900/20"></div>
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
 
@@ -64,7 +63,6 @@ export default function Footer() {
               curated collection of professional performers.
             </p>
 
-            {/* Social Media Links */}
             <div className="flex space-x-4 mb-8">
               {socialIcons.map(({ Icon, href, label }) => (
                 <motion.a
@@ -80,7 +78,6 @@ export default function Footer() {
               ))}
             </div>
 
-            {/* Newsletter Signup */}
             <motion.div
               className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-6"
               variants={itemVariants}
@@ -184,7 +181,6 @@ export default function Footer() {
               <span>for the creative community</span>
             </div>
 
-            {/* Trust indicators */}
             <div className="flex flex-wrap justify-center items-center gap-4 text-sm text-gray-500">
               <span className="flex items-center">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
