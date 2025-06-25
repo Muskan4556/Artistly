@@ -1,36 +1,133 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Artistly - Performing Artist Booking Platform
 
-## Getting Started
+A modern web platform connecting performing artists with booking managers. Built with Next.js, React, and TypeScript for optimal performance and user experience.
 
-First, run the development server:
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-black?style=flat-square&logo=vercel&logoColor=white)](https://artistly-sigma-seven.vercel.app/)
+![Next.js](https://img.shields.io/badge/Next.js-15.3+-black?style=flat-square&logo=next.js)
+![React](https://img.shields.io/badge/React-19.0+-blue?style=flat-square&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue?style=flat-square&logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0+-38B2AC?style=flat-square&logo=tailwind-css)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Features
+
+- **Multi-page Application**: Homepage, Artist Directory, Onboarding Form, Manager Dashboard
+- **High Performance**: Optimized loading with lazy loading and code splitting
+- **Responsive Design**: Mobile-first approach with seamless desktop experience
+- **Modern UI**: Beautiful components built with ShadCN UI and Tailwind CSS
+- **Form Validation**: Robust validation using React Hook Form + Zod
+- **Advanced Filtering**: Search and filter artists by multiple criteria
+- **Theme Support**: Light/dark mode with smooth transitions
+- **Type Safety**: Full TypeScript implementation with strict type checking
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15+ (App Router)
+- **Frontend**: React 19+ (Functional Components)
+- **Language**: TypeScript 5+
+- **Styling**: Tailwind CSS 4+
+- **UI Components**: ShadCN UI
+- **Forms**: React Hook Form + Zod validation
+- **Tables**: TanStack Table
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Themes**: Next Themes
+- **Notifications**: Sonner
+- **Deployment**: Vercel
+
+## 📦 Installation
+
+### Prerequisites
+
+- **Node.js**: 18+
+- **Package Manager**: npm, yarn, or pnpm
+- **Git**: Any recent version
+
+### Setup
+
+1. **Clone the repository**
+
+   ```bash
+   git clone <repository-url>
+   cd artistly
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   ```
+
+3. **Run the development server**
+
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   ```
+
+4. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000) to see the application.
+
+## 📁 Project Structure
+
+```
+artistly/
+├── app/                          # Next.js App Router pages
+│   ├── artist-onboarding/        # Artist registration form
+│   ├── artists/                  # Artist directory and listings
+│   ├── dashboard/                # Manager dashboard
+│   └── page.tsx                  # Homepage
+├── components/                   # Reusable React components
+│   ├── artists/                  # Artist-related components
+│   ├── dashboard/                # Dashboard components
+│   ├── forms/                    # Form components with validation
+│   ├── homepage/                 # Landing page components
+│   ├── shared/                   # Shared UI components
+│   ├── shimmer/                  # Loading shimmer components
+│   └── ui/                       # ShadCN UI base components
+├── contexts/                     # React context providers
+├── data/                         # Mock data and constants
+├── lib/                          # Utility functions and configurations
+├── types/                        # TypeScript type definitions
+└── public/                       # Static assets
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Build & Deploy
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev          # Start development server (http://localhost:3000)
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint for code quality checks
+```
 
-## Learn More
+## 🤝 Contributing
 
-To learn more about Next.js, take a look at the following resources:
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📄 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Deploy on Vercel
+## 🙏 Acknowledgments
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Next.js Team** for the amazing framework
+- **ShadCN** for the beautiful UI component library
+- **Vercel** for hosting and deployment platform
+- **Tailwind CSS** for the utility-first CSS framework
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+Built with ❤️ by **Muskan** for connecting artists and booking managers through technology.

@@ -15,7 +15,7 @@ interface ProcessStepProps {
     <div className="relative flex flex-col items-center text-center group">
       {!isLast && (
         <motion.div
-          className="hidden lg:block absolute top-12 left-full w-16 h-24  items-center justify-center z-0"
+          className="hidden md:block absolute top-12 left-full w-16 h-24  items-center justify-center z-0"
           initial={{ opacity: 0, scale: 0 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}

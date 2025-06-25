@@ -8,7 +8,7 @@ import { Filter, Grid3X3, List } from "lucide-react";
 import { artists } from "@/data/artists/mocks";
 import { FilterState } from "@/types/artist";
 import ArtistFiltersShimmer from "@/components/shimmer/artist-filters-shimmer";
-    
+
 const ArtistFilters = lazy(() => import("@/components/artists/artist-filters"));
 
 const formatCategoryFromURL = (category: string | null): string => {
@@ -124,7 +124,7 @@ export default function ArtistsPageContent() {
     <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 sm:py-8">
       <div className="mb-4 sm:mb-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <h2 className="text-xl sm:text-lg font-semibold text-gray-900 dark:text-white">
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">
             {filteredArtists.length} Artists Found
           </h2>
           <div className="flex items-center justify-between sm:justify-end space-x-2">
@@ -158,13 +158,6 @@ export default function ArtistsPageContent() {
               >
                 <Grid3X3 className="w-4 h-4" />
               </Button>
-              <Button
-                variant={viewMode === "list" ? "default" : "ghost"}
-                size="sm"
-                onClick={() => handleViewModeChange("list")}
-              >
-                <List className="w-4 h-4" />
-              </Button>
             </div>
 
             <div className="hidden md:flex items-center space-x-1">
@@ -187,15 +180,29 @@ export default function ArtistsPageContent() {
         </div>
       </div>
 
+      {showMobileFilters && (
+        <div className="lg:hidden mb-6">
+          <Suspense fallback={<ArtistFiltersShimmer />}>
+            <ArtistFilters
+              filters={filters}
+              onFiltersChange={handleFiltersChange}
+              totalResults={filteredArtists.length}
+              viewMode={viewMode}
+              onViewModeChange={handleViewModeChange}
+              isMobile={true}
+              onClose={() => setShowMobileFilters(false)}
+            />
+          </Suspense>
+        </div>
+      )}
+
       <div
-        className={`flex gap-6 ${
-          showDesktopFilters
-            ? "lg:grid lg:grid-cols-[300px_1fr]"
-            : "lg:grid lg:grid-cols-1"
+        className={`lg:grid lg:gap-8 ${
+          showDesktopFilters ? "lg:grid-cols-12" : "lg:grid-cols-1"
         }`}
       >
         {showDesktopFilters && (
-          <div className="hidden lg:block">
+          <div className="hidden lg:block lg:col-span-3">
             <Suspense fallback={<ArtistFiltersShimmer />}>
               <ArtistFilters
                 filters={filters}
@@ -208,23 +215,7 @@ export default function ArtistsPageContent() {
           </div>
         )}
 
-        {showMobileFilters && (
-          <div className="lg:hidden mb-6">
-            <Suspense fallback={<ArtistFiltersShimmer />}>
-              <ArtistFilters
-                filters={filters}
-                onFiltersChange={handleFiltersChange}
-                totalResults={filteredArtists.length}
-                viewMode={viewMode}
-                onViewModeChange={handleViewModeChange}
-                isMobile={true}
-                onClose={() => setShowMobileFilters(false)}
-              />
-            </Suspense>
-          </div>
-        )}
-
-        <div className="flex-1 min-w-0">
+        <div className={showDesktopFilters ? "lg:col-span-9" : "lg:col-span-1"}>
           <ArtistGrid artists={filteredArtists} viewMode={viewMode} />
         </div>
       </div>

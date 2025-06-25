@@ -122,7 +122,7 @@ export default function HeroSection() {
 
             <motion.h1
               variants={itemVariants}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight"
             >
               Book Performing Artists for{" "}
               <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
@@ -132,7 +132,7 @@ export default function HeroSection() {
 
             <motion.p
               variants={itemVariants}
-              className="mt-6 text-xl text-gray-700 dark:text-gray-200 leading-relaxed"
+              className="mt-6 text-lg sm:text-xl text-gray-700 dark:text-gray-200 leading-relaxed"
             >
               {`Discover, shortlist, and book India's top performing
                 artists—seamlessly connect with professionals for any event.`}
@@ -143,34 +143,34 @@ export default function HeroSection() {
               className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4"
             >
               <div className="text-center">
-                <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                <div className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
                   {platformStats.totalArtists}
                 </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                   Artists
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                <div className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
                   {platformStats.totalEvents}
                 </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                   Events
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                <div className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
                   {platformStats.citiesCovered}
                 </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                   Cities
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                <div className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
                   4.9★
                 </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                   Rating
                 </div>
               </div>
@@ -186,7 +186,7 @@ export default function HeroSection() {
               >
                 <Button
                   size="lg"
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-lg px-8 py-4 h-auto shadow-lg hover:shadow-xl transition-all duration-300 focus:ring-4 focus:ring-purple-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900"
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 h-auto shadow-lg hover:shadow-xl transition-all duration-300 focus:ring-4 focus:ring-purple-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900"
                   asChild
                 >
                   <Link
@@ -195,7 +195,10 @@ export default function HeroSection() {
                     aria-label="Explore artists - browse our collection of professional performers"
                   >
                     Explore Artists
-                    <ArrowRight className="w-5 h-5 ml-2" aria-hidden="true" />
+                    <ArrowRight
+                      className="w-4 sm:w-5 h-4 sm:h-5 ml-2"
+                      aria-hidden="true"
+                    />
                   </Link>
                 </Button>
               </motion.div>
@@ -206,7 +209,7 @@ export default function HeroSection() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="text-lg px-8 py-4 h-auto border-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300 focus:ring-4 focus:ring-purple-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900"
+                  className="text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 h-auto border-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300 focus:ring-4 focus:ring-purple-500/50 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900"
                   asChild
                 >
                   <Link

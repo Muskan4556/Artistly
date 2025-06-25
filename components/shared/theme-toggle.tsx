@@ -7,13 +7,13 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
-  const isDark = theme === "dark";
+  const isDark = resolvedTheme === "dark";
   const tooltipText = isDark ? "Light mode" : "Dark mode";
 
   return (
@@ -25,7 +25,7 @@ export function ThemeToggle() {
       title={tooltipText}
     >
       <motion.div
-        key={theme}
+        key={resolvedTheme}
         initial={{ scale: 0, rotate: -180 }}
         animate={{ scale: 1, rotate: 0 }}
         exit={{ scale: 0, rotate: 180 }}

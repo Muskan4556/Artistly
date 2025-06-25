@@ -91,18 +91,25 @@ export default function Home() {
               Discover some of our top-rated performers
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <Suspense
               fallback={
                 <>
                   {[...Array(3)].map((_, i) => (
-                    <FeaturedArtistShimmer key={i} />
+                    <div key={i} className={i === 2 ? "hidden lg:block" : ""}>
+                      <FeaturedArtistShimmer />
+                    </div>
                   ))}
                 </>
               }
             >
               {featuredArtists.map((artist, index) => (
-                <FeaturedArtistCard key={index} artist={artist} index={index} />
+                <div
+                  key={index}
+                  className={index === 2 ? "hidden lg:block" : ""}
+                >
+                  <FeaturedArtistCard artist={artist} index={index} />
+                </div>
               ))}
             </Suspense>
           </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { UseFormReturn } from "react-hook-form";
 import Image from "next/image";
 import { User, Image as ImageIcon, X, AlertCircle } from "lucide-react";
@@ -30,23 +30,33 @@ interface PersonalInformationSectionProps {
   form: UseFormReturn<ArtistFormData>;
 }
 
+function useImagePreview(file: File | undefined) {
+  const [preview, setPreview] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (file instanceof File) {
+      const reader = new FileReader();
+      reader.onloadend = () => setPreview(reader.result as string);
+      reader.readAsDataURL(file);
+    } else {
+      setPreview(null);
+    }
+  }, [file]);
+
+  return preview;
+}
+
 export default function PersonalInformationSection({
   form,
 }: PersonalInformationSectionProps) {
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const profileImageValue = form.watch("profileImage");
+  const imagePreview = useImagePreview(profileImageValue);
 
-  const handleImageUpload = (file: File | undefined) => {
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        console.log(reader.result);
-        setImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-      
-    } else {
-      setImagePreview(null);
-    }
+  const handleImageUpload = (
+    file: File | undefined,
+    onChange: (file: File | undefined) => void
+  ) => {
+    onChange(file);
   };
 
   const bioLength = form.watch("bio")?.length || 0;
@@ -203,10 +213,9 @@ export default function PersonalInformationSection({
                               />
                               <button
                                 type="button"
-                                onClick={() => {
-                                  onChange(undefined);
-                                  handleImageUpload(undefined);
-                                }}
+                                onClick={() =>
+                                  handleImageUpload(undefined, onChange)
+                                }
                                 className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
                               >
                                 <X className="w-3 h-3" />
@@ -227,8 +236,7 @@ export default function PersonalInformationSection({
                           accept="image/*"
                           onChange={(e) => {
                             const file = e.target.files?.[0];
-                            onChange(file);
-                            handleImageUpload(file);
+                            handleImageUpload(file, onChange);
                           }}
                           name={field.name}
                           onBlur={field.onBlur}
