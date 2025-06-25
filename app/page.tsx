@@ -1,15 +1,24 @@
 "use client";
 
+import { Suspense, lazy } from "react";
 import HeroSection from "@/components/homepage/hero-section";
 import CategoryCard from "@/components/homepage/category-card";
-import ProcessStep from "@/components/homepage/process-step";
-import FeaturedArtistCard from "@/components/homepage/featured-artist-card";
-import SocialProofSection from "@/components/homepage/social-proof-section";
+import ProcessStepShimmer from "@/components/shimmer/process-step-shimmer";
+import FeaturedArtistShimmer from "@/components/shimmer/featured-artist-shimmer";
+import SocialProofShimmer from "@/components/shimmer/social-proof-shimmer";
 import {
   categories,
   howItWorksSteps,
   featuredArtists,
 } from "@/data/homepage/mocks";
+
+const ProcessStep = lazy(() => import("@/components/homepage/process-step"));
+const FeaturedArtistCard = lazy(
+  () => import("@/components/homepage/featured-artist-card")
+);
+const SocialProofSection = lazy(
+  () => import("@/components/homepage/social-proof-section")
+);
 
 export default function Home() {
   return (
@@ -50,14 +59,24 @@ export default function Home() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 relative">
-            {howItWorksSteps.map((step, index) => (
-              <ProcessStep
-                key={index}
-                step={step}
-                index={index}
-                isLast={index === howItWorksSteps.length - 1}
-              />
-            ))}
+            <Suspense
+              fallback={
+                <>
+                  {[...Array(3)].map((_, i) => (
+                    <ProcessStepShimmer key={i} />
+                  ))}
+                </>
+              }
+            >
+              {howItWorksSteps.map((step, index) => (
+                <ProcessStep
+                  key={index}
+                  step={step}
+                  index={index}
+                  isLast={index === howItWorksSteps.length - 1}
+                />
+              ))}
+            </Suspense>
           </div>
         </div>
       </section>
@@ -73,14 +92,26 @@ export default function Home() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredArtists.map((artist, index) => (
-              <FeaturedArtistCard key={index} artist={artist} index={index} />
-            ))}
+            <Suspense
+              fallback={
+                <>
+                  {[...Array(3)].map((_, i) => (
+                    <FeaturedArtistShimmer key={i} />
+                  ))}
+                </>
+              }
+            >
+              {featuredArtists.map((artist, index) => (
+                <FeaturedArtistCard key={index} artist={artist} index={index} />
+              ))}
+            </Suspense>
           </div>
         </div>
       </section>
 
-      <SocialProofSection />
+      <Suspense fallback={<SocialProofShimmer />}>
+        <SocialProofSection />
+      </Suspense>
     </div>
   );
 }

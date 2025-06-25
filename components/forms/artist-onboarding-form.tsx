@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, Suspense, lazy } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Upload } from "lucide-react";
@@ -8,11 +8,17 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import PersonalInformationSection from "./personal-information-section";
-import ProfessionalInformationSection from "./professional-information-section";
-import OnlinePresenceSection from "./online-presence-section";
+import FormSectionShimmer from "@/components/shimmer/form-section-shimmer";
 
 import { artistFormSchema, type ArtistFormData } from "@/types/artist-form";
+
+const PersonalInformationSection = lazy(
+  () => import("./personal-information-section")
+);
+const ProfessionalInformationSection = lazy(
+  () => import("./professional-information-section")
+);
+const OnlinePresenceSection = lazy(() => import("./online-presence-section"));
 
 export default function ArtistOnboardingForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -76,9 +82,17 @@ export default function ArtistOnboardingForm() {
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <PersonalInformationSection form={form} />
-            <ProfessionalInformationSection form={form} />
-            <OnlinePresenceSection form={form} />
+            <Suspense fallback={<FormSectionShimmer />}>
+              <PersonalInformationSection form={form} />
+            </Suspense>
+
+            <Suspense fallback={<FormSectionShimmer />}>
+              <ProfessionalInformationSection form={form} />
+            </Suspense>
+
+            <Suspense fallback={<FormSectionShimmer />}>
+              <OnlinePresenceSection form={form} />
+            </Suspense>
 
             <div className="flex flex-col items-center gap-4">
               <Button
@@ -111,4 +125,3 @@ export default function ArtistOnboardingForm() {
     </div>
   );
 }
- 

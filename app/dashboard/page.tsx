@@ -1,13 +1,20 @@
 "use client";
 
-import { useState } from "react";
-import DashboardHeader from "@/components/dashboard/dashboard-header";
-import SubmissionsTable from "@/components/dashboard/submissions-table";
+import { useState, Suspense, lazy } from "react";
 import {
   artistSubmissions,
   ArtistSubmission,
   getSubmissionStats,
 } from "@/data/dashboard/mocks";
+import DashboardHeaderShimmer from "@/components/shimmer/dashboard-header-shimmer";
+import SubmissionsTableShimmer from "@/components/shimmer/submissions-table-shimmer";
+
+const DashboardHeader = lazy(
+  () => import("@/components/dashboard/dashboard-header")
+);
+const SubmissionsTable = lazy(
+  () => import("@/components/dashboard/submissions-table")
+);
 
 export default function DashboardPage() {
   const [submissions, setSubmissions] =
@@ -35,10 +42,14 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <DashboardHeader stats={stats} />
+      <Suspense fallback={<DashboardHeaderShimmer />}>
+        <DashboardHeader stats={stats} />
+      </Suspense>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        <SubmissionsTable submissions={submissions} onAction={handleAction} />
+        <Suspense fallback={<SubmissionsTableShimmer />}>
+          <SubmissionsTable submissions={submissions} onAction={handleAction} />
+        </Suspense>
       </div>
     </div>
   );
