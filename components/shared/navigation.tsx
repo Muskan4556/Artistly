@@ -51,8 +51,11 @@ export default function Navigation() {
             </Link>
             <ThemeToggle />
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 shadow-lg">
-                Get Started
+              <Button
+                asChild
+                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 shadow-lg"
+              >
+                <Link href="/artist-onboarding">Get Started</Link>
               </Button>
             </motion.div>
           </div>
@@ -105,8 +108,12 @@ export default function Navigation() {
               >
                 Dashboard
               </Link>
-              <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 w-full">
-                Get Started
+              <Button
+                asChild
+                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 w-full"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Link href="/artist-onboarding">Get Started</Link>
               </Button>
             </div>
           </motion.div>
