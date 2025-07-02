@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, Suspense, lazy } from "react";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import ArtistGrid from "@/components/artists/artist-grid";
 import { Button } from "@/components/ui/button";
 import { Filter, Grid3X3, List } from "lucide-react";
@@ -11,23 +11,60 @@ import ArtistFiltersShimmer from "@/components/shimmer/artist-filters-shimmer";
 
 const ArtistFilters = lazy(() => import("@/components/artists/artist-filters"));
 
-const formatCategoryFromURL = (category: string | null): string => {
-  if (!category) return "";
-
-  const categoryMap: { [key: string]: string } = {
+const FILTER_MAPS = {
+  category: {
     singer: "Singer",
     dj: "DJ",
     dancers: "Dancers",
     speaker: "Speaker",
-  };
+  },
+  location: {
+    mumbai: "Mumbai",
+    delhi: "Delhi",
+    bangalore: "Bangalore",
+    pune: "Pune",
+    jaipur: "Jaipur",
+    chennai: "Chennai",
+    hyderabad: "Hyderabad",
+    kolkata: "Kolkata",
+  },
+  price: {
+    under20k: [0, 20000] as [number, number],
+    "20k-35k": [20000, 35000] as [number, number],
+    "35k-50k": [35000, 50000] as [number, number],
+    above50k: [50000, 100000] as [number, number],
+  },
+};
 
-  return categoryMap[category.toLowerCase()] || "";
+const parseUrlParam = (
+  param: string | null,
+  type: keyof typeof FILTER_MAPS
+): string | [number, number] => {
+  if (!param) return type === "price" ? [0, 100000] : "";
+
+  const lowerParam = param.toLowerCase();
+
+  if (type === "category") {
+    const categoryMap = FILTER_MAPS.category as Record<string, string>;
+    return categoryMap[lowerParam] || "";
+  }
+
+  if (type === "location") {
+    const locationMap = FILTER_MAPS.location as Record<string, string>;
+    return locationMap[lowerParam] || "";
+  }
+
+  if (type === "price") {
+    const priceMap = FILTER_MAPS.price as Record<string, [number, number]>;
+    return priceMap[lowerParam] || [0, 100000];
+  }
+
+  return "";
 };
 
 export default function ArtistsPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const pathname = usePathname();
 
   const [filters, setFilters] = useState<FilterState>({
     categories: "",
@@ -41,35 +78,44 @@ export default function ArtistsPageContent() {
   const [showDesktopFilters, setShowDesktopFilters] = useState(true);
 
   useEffect(() => {
-    const category = searchParams.get("category");
-    const normalizedCategory = formatCategoryFromURL(category);
-
-    setFilters((prev) => ({
-      ...prev,
-      categories: normalizedCategory,
-    }));
+    setFilters({
+      categories: parseUrlParam(
+        searchParams.get("category"),
+        "category"
+      ) as string,
+      locations: parseUrlParam(
+        searchParams.get("location"),
+        "location"
+      ) as string,
+      priceRange: parseUrlParam(searchParams.get("price"), "price") as [
+        number,
+        number
+      ],
+      searchQuery: searchParams.get("search") || "",
+    });
   }, [searchParams]);
 
-  const updateCategoryURL = (category: string) => {
-    if (category) {
-      const urlCategory = category.toLowerCase();
-      router.replace(`${pathname}?category=${urlCategory}`, {
-        scroll: false,
-      });
-    } else {
-      router.replace(pathname, { scroll: false });
-    }
-  };
-
   const handleFiltersChange = (newFilters: FilterState) => {
-    const oldCategory = filters.categories;
-    const newCategory = newFilters.categories;
-
     setFilters(newFilters);
 
-    if (oldCategory !== newCategory) {
-      updateCategoryURL(newCategory);
+    const params = new URLSearchParams();
+    if (newFilters.categories)
+      params.set("category", newFilters.categories.toLowerCase());
+    if (newFilters.locations)
+      params.set("location", newFilters.locations.toLowerCase());
+    if (newFilters.searchQuery) params.set("search", newFilters.searchQuery);
+
+    if (newFilters.priceRange[1] < 100000) {
+      const [min, max] = newFilters.priceRange;
+      if (max <= 20000) params.set("price", "under20k");
+      else if (min >= 20000 && max <= 35000) params.set("price", "20k-35k");
+      else if (min >= 35000 && max <= 50000) params.set("price", "35k-50k");
+      else if (min >= 50000) params.set("price", "above50k");
     }
+
+    router.replace(params.toString() ? `?${params}` : "/artists", {
+      scroll: false,
+    });
   };
 
   const handleViewModeChange = (newViewMode: "grid" | "list") => {
@@ -101,18 +147,8 @@ export default function ArtistsPageContent() {
     if (filters.searchQuery) {
       const query = filters.searchQuery.toLowerCase();
       const nameMatch = artist.name.toLowerCase().includes(query);
-      const descriptionMatch = artist.description.toLowerCase().includes(query);
-      const specialtyMatch = artist.specialties.some((specialty) =>
-        specialty.toLowerCase().includes(query)
-      );
-      const categoryMatch = artist.category.toLowerCase().includes(query);
 
-      if (
-        !nameMatch &&
-        !descriptionMatch &&
-        !specialtyMatch &&
-        !categoryMatch
-      ) {
+      if (!nameMatch) {
         return false;
       }
     }
